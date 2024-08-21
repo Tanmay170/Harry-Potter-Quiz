@@ -81,6 +81,10 @@ function Quiz() {
   const [score, setScore] = useState(0);
   const [mistakes, setMistakes] = useState(0);
   const [showScore, setShowScore] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [correctAnswer, setCorrectAnswer] = useState(null);
+  const [answerStatus, setAnswerStatus] = useState(''); // 'correct' | 'incorrect' | ''
+  const [isDisabled, setIsDisabled] = useState(false); // Button disabled state
 
   useEffect(() => {
     // Select 5 random questions on page load
@@ -89,52 +93,72 @@ function Quiz() {
   }, []);
 
   const handleAnswer = (option) => {
-    if (option === questions[currentQuestion].answer) {
+    if (isDisabled) return; // Prevent actions while feedback is shown
+
+    const isCorrect = option === questions[currentQuestion].answer;
+    setSelectedOption(option);
+    setCorrectAnswer(questions[currentQuestion].answer);
+    setAnswerStatus(isCorrect ? 'correct' : 'incorrect');
+    setIsDisabled(true); // Disable buttons during feedback
+
+    if (isCorrect) {
       setScore(score + 1);
     } else {
       setMistakes(mistakes + 1);
       if (mistakes + 1 >= 3) {
         setShowScore(true);
+        return;
       }
     }
 
-    const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < questions.length) {
-      setCurrentQuestion(nextQuestion);
-    } else {
-      setShowScore(true);
-    }
+    setTimeout(() => {
+      const nextQuestion = currentQuestion + 1;
+      if (nextQuestion < questions.length) {
+        setCurrentQuestion(nextQuestion);
+        setSelectedOption(null);
+        setCorrectAnswer(null);
+        setAnswerStatus('');
+        setIsDisabled(false); // Re-enable buttons for the next question
+      } else {
+        setShowScore(true);
+      }
+    }, 1500); // Delay of 1.5 seconds
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-yellow-50 py-8 px-4">
-      <h1 className="text-4xl md:text-5xl font-bold mb-8 text-yellow-400 text-center">Harry Potter Quiz</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 py-8 bg-gray-900 text-yellow-50">
+      <h1 className="mb-8 text-4xl font-bold text-center text-yellow-400 md:text-5xl">Harry Potter Quiz</h1>
 
       {showScore ? (
-        <div className="bg-gray-800 p-6 rounded-lg shadow-md text-center">
-          <h2 className="text-3xl mb-4">Final Score: {score}</h2>
+        <div className="p-6 text-center bg-gray-800 rounded-lg shadow-md">
+          <h2 className="mb-4 text-3xl">Final Score: {score}</h2>
           <button 
             onClick={() => window.location.reload()} 
-            className="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg"
+            className="px-4 py-2 font-bold text-white bg-yellow-600 rounded-lg hover:bg-yellow-700"
           >
             Play Again
           </button>
         </div>
       ) : (
-        <div className="bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-3xl">
+        <div className="w-full max-w-3xl p-6 bg-gray-800 rounded-lg shadow-md">
           <p className="mb-4 text-xl md:text-2xl">{questions[currentQuestion]?.question}</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {questions[currentQuestion]?.options.map((option, index) => (
               <button
                 key={index}
                 onClick={() => handleAnswer(option)}
-                className="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg"
+                disabled={isDisabled} // Disable buttons during feedback
+                className={`font-bold py-2 px-4 rounded-lg ${
+                  option === correctAnswer ? 
+                    (option === selectedOption ? 'bg-green-600' : 'bg-green-800') :
+                    (option === selectedOption && answerStatus === 'incorrect' ? 'bg-red-600' : 'bg-yellow-600 hover:bg-yellow-700')
+                }`}
               >
                 {option}
               </button>
             ))}
           </div>
-          <div className="mt-6 flex justify-between items-center">
+          <div className="flex items-center justify-between mt-6">
             <p className="text-lg">Score: {score}</p>
             <p className="text-lg">Mistakes Left: {3 - mistakes}</p>
           </div>
@@ -145,3 +169,4 @@ function Quiz() {
 }
 
 export default Quiz;
+
