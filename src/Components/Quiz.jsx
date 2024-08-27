@@ -71,11 +71,6 @@ const allQuestions = [
   answer: "Nagini"
 },
 {
-  question: "Who was the founder of the house of Gryffindor?",
-  options: ["Helga Hufflepuff", "Salazar Slytherin", "Godric Gryffindor", "Rowena Ravenclaw"],
-  answer: "Godric Gryffindor"
-},
-{
   question: "Which potion allows a person to assume the form of someone else?",
   options: ["Polyjuice Potion", "Veritaserum", "Amortentia", "Felix Felicis"],
   answer: "Polyjuice Potion"
@@ -109,11 +104,6 @@ const allQuestions = [
   question: "Which house did the Sorting Hat almost place Harry in?",
   options: ["Hufflepuff", "Ravenclaw", "Slytherin", "Gryffindor"],
   answer: "Slytherin"
-},
-{
-  question: "What is Dobby?",
-  options: ["A goblin", "A house-elf", "A troll", "A centaur"],
-  answer: "A house-elf"
 },
 {
   question: "Who was the master of the Elder Wand before Harry?",
@@ -169,6 +159,46 @@ const allQuestions = [
   question: "What plant is used to cure petrification?",
   options: ["Gillyweed", "Wolfsbane", "Mandrake", "Devil's Snare"],
   answer: "Mandrake"
+},
+{
+question: "What is the name of the street where Harry Potter lives with his horrible relatives, the Dursleys?",
+options: ["Hogwarts Way", "Privet Drive", " Wizarding Street", " Magic Avenue"],
+answer: " Privet Drive "
+},
+{
+question: " What is the name of the sport played on broomsticks in the Harry Potter series?",
+options: ["Broomball", " Flying Football", " Wizardball", " Quidditch"],
+answer: " Quidditch"
+},
+{
+question: " What is the name of the magical school that Harry Potter attends?",
+options: ["Wizarding Academy", " Hogwarts School of Witchcraft and Wizardry ", " Magic Institute","Sorcery School "],
+answer: " Hogwarts School of Witchcraft and Wizardry "
+},
+{
+question: " Who is Harry's best friend and companion throughout the series?",
+options: ["Draco Malfoy", " Neville Longbottom", " Ron Weasley ", " Luna Lovegood"],
+answer: " Ron Weasley "
+},
+{
+question: " What is the name of the evil wizard who killed Harry's parents and seeks to return to power?",
+options: ["Lord Voldemort", " Professor Snape", " Draco Malfoy", " The Dark Wizard"],
+answer: " Lord Voldemort"
+},
+{
+question: "What is the name of the wizarding prison guarded by Dementors?",
+options: ["Azkaban Prison", " Hogwarts Dungeon", " Ministry of Magic Holding Cell ", " Wizarding Jail"],
+answer: " Azkaban Prison"
+},
+{
+question: " What is the name of the magical train that takes students from Platform 9 3/4 to Hogwarts?",
+options: ["The Wizard's Rail", "The Hogwarts Express", " The Magic Choo-Choo ", " The Flying Train "],
+answer: " The Hogwarts Express "
+},
+{
+question: " What is the name of the wizarding village near Hogwarts where students often go on weekends?",
+options: ["Ottery St. Catchpole ", "Godric's Hollow ", " Diagon Alley", " Hogsmeade "],
+answer: "Hogsmeade "
 },
 {
   question: "Who is the conductor of the Knight Bus?",
